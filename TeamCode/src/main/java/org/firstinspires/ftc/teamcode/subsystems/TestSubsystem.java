@@ -8,7 +8,7 @@ public class TestSubsystem extends SubsystemBase{
     private final Motor motor;
 
     public TestSubsystem(final HardwareMap hMap, final String name){
-        motor = hMap.get(Motor.class, name);
+        motor = new Motor(hMap, name, Motor.GoBILDA.RPM_435);
     }
 
     public void halfSpeed(){
