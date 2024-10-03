@@ -12,7 +12,7 @@ public class TestCommand extends CommandBase { //commands are where specific thi
 
     public TestCommand(TestSubsystem subsystem, GamepadEx gamepad){ //parameters needed are the subsystem and speed of the motor
         testSubsystem = subsystem; //makes the testsubsystem variable be the one in the method parameters
-        motorSpeed = Math.abs(gamepad.getLeftY()); //makes speed variable be gamepad value (from 0 to 1)
+        motorSpeed = gamepad.getLeftY(); //makes speed variable be gamepad stick value
         addRequirements(subsystem); //declares subsystem as a dependency for the command
     }
 
