@@ -18,12 +18,8 @@ public class TestOpMode extends CommandOpMode { //opmodes are the thing we start
     public void initialize() { //runs only when the opmode starts
         GamepadEx gamepad = new GamepadEx(gamepad1); //adds the gamepad we're using as a gamepadex object
 
-        double speed = gamepad.getLeftY(); //gets the y position of the left joystick
-
         TestSubsystem testSubsystem = new TestSubsystem(hardwareMap, "motor0", Motor.GoBILDA.RPM_312, "servo0"); //creates an instance of testsubsystem with motor0 and servo0 from the hardwaremap, and specifying the rpm of the motor
-        //CommandScheduler.getInstance().setDefaultCommand(testSubsystem, new TestCommand(testSubsystem, speed)); //tells the commandscheduler the command that will run by default all the time is testcommand using the testsubsystem
 
-        testSubsystem.setDefaultCommand(new TestCommand(testSubsystem, Math.abs(speed))); //sets the default command of testsubsystem to be testcommand
-        //gamepad.getGamepadButton(GamepadKeys.Button.A).whenPressed(new TestCommand(testSubsystem, 1)).whenReleased(new TestCommand(testSubsystem, 0)); //sets motor speed to 1 when a is pressed and 0 when a isn't pressed
+        testSubsystem.setDefaultCommand(new TestCommand(testSubsystem, gamepad)); //sets the default command of testsubsystem to be testcommand
     }
 }
