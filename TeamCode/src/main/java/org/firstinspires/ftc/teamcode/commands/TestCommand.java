@@ -2,17 +2,18 @@ package org.firstinspires.ftc.teamcode.commands;
 
 //everything not in this class that we need to access
 import com.arcrobotics.ftclib.command.CommandBase;
-import com.arcrobotics.ftclib.gamepad.GamepadEx;
 
 import org.firstinspires.ftc.teamcode.subsystems.TestSubsystem;
 
+import java.util.function.DoubleSupplier;
+
 public class TestCommand extends CommandBase { //commands are where specific things that subsystem(s) will do are defined, there can be many commands for one subsystem and many subsystems in one command
     private final TestSubsystem testSubsystem;
-    private double motorSpeed;
+    private DoubleSupplier motorSpeed;
 
-    public TestCommand(TestSubsystem subsystem, GamepadEx gamepad){ //parameters needed are the subsystem and speed of the motor
+    public TestCommand(TestSubsystem subsystem, DoubleSupplier speed){ //parameters needed are the subsystem and speed of the motor
         testSubsystem = subsystem; //makes the testsubsystem variable be the one in the method parameters
-        motorSpeed = gamepad.getLeftY(); //makes speed variable be gamepad stick value
+        motorSpeed = speed; //makes speed variable be gamepad stick value
         addRequirements(subsystem); //declares subsystem as a dependency for the command
     }
 
@@ -21,6 +22,6 @@ public class TestCommand extends CommandBase { //commands are where specific thi
         //runs these methods from testsubsystem
         testSubsystem.halfSpin();
         testSubsystem.fullSpin();
-        testSubsystem.setMotor(motorSpeed); //this one takes in the speed we got from the gamepad
+        testSubsystem.setMotor(motorSpeed.getAsDouble()); //this one takes in the speed we got from the gamepad
     }
 }

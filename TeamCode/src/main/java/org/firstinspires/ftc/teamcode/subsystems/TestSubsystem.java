@@ -32,5 +32,4 @@ public class TestSubsystem extends SubsystemBase{ //subsystems are the base leve
     public void setMotor(double speed) { //speed initially from gamepad input, multiplied by 100 so it's obvious that it's spinning
         motor.set(speed * 100);
     }
-
 }

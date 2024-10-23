@@ -7,6 +7,7 @@ import com.arcrobotics.ftclib.command.button.GamepadButton;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.commands.TestCommand;
 import org.firstinspires.ftc.teamcode.subsystems.TestSubsystem;
@@ -20,6 +21,6 @@ public class TestOpMode extends CommandOpMode { //opmodes are the thing we start
 
         TestSubsystem testSubsystem = new TestSubsystem(hardwareMap, "motor0", Motor.GoBILDA.RPM_312, "servo0"); //creates an instance of testsubsystem with motor0 and servo0 from the hardwaremap, and specifying the rpm of the motor
 
-        testSubsystem.setDefaultCommand(new TestCommand(testSubsystem, gamepad)); //sets the default command of testsubsystem to be testcommand
+        testSubsystem.setDefaultCommand(new TestCommand(testSubsystem, gamepad::getLeftY)); //sets the default command of testsubsystem to be testcommand
     }
 }
