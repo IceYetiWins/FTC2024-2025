@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
-import com.arcrobotics.ftclib.hardware.RevIMU;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.hardware.motors.MotorGroup;
@@ -30,5 +29,9 @@ public class DriveSubsystem extends SubsystemBase {
         leftFront.setVelocity(leftFrontSpeed);
         rightBack.setVelocity(rightBackSpeed);
         rightFront.setVelocity(rightFrontSpeed);
+    }
+
+    public void initializeIMU(IMU.Parameters parameters){
+        imu.initialize(parameters);
     }
 }

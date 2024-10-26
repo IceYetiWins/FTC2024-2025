@@ -9,7 +9,7 @@ import java.util.function.DoubleSupplier;
 
 public class TestCommand extends CommandBase { //commands are where specific things that subsystem(s) will do are defined, there can be many commands for one subsystem and many subsystems in one command
     private final TestSubsystem testSubsystem;
-    private DoubleSupplier motorSpeed;
+    private final DoubleSupplier motorSpeed;
 
     public TestCommand(TestSubsystem subsystem, DoubleSupplier speed){ //parameters needed are the subsystem and speed of the motor
         testSubsystem = subsystem; //makes the testsubsystem variable be the one in the method parameters
