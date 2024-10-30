@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
 
+import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 public class DriveTeleOpCommand extends CommandBase {
@@ -15,9 +16,11 @@ public class DriveTeleOpCommand extends CommandBase {
     private final IMU.Parameters parameters;
     private final Motor.RunMode runMode;
     private final DoubleSupplier leftY, leftX, rightX;
+    private final BooleanSupplier imuReset;
     private double leftBackSpeed, leftFrontSpeed, rightBackSpeed, rightFrontSpeed;
 
-    public DriveTeleOpCommand(DriveSubsystem subsystem, IMU imu, IMU.Parameters parameters, Motor.RunMode runMode, DoubleSupplier leftY, DoubleSupplier leftX, DoubleSupplier rightX){
+
+    public DriveTeleOpCommand(DriveSubsystem subsystem, IMU imu, IMU.Parameters parameters, Motor.RunMode runMode, DoubleSupplier leftY, DoubleSupplier leftX, DoubleSupplier rightX, BooleanSupplier imuReset){
         driveSubsystem = subsystem;
         this.imu = imu;
         this.parameters = parameters;
@@ -25,6 +28,7 @@ public class DriveTeleOpCommand extends CommandBase {
         this.leftY = leftY;
         this.leftX = leftX;
         this.rightX = rightX;
+        this.imuReset = imuReset;
         addRequirements(subsystem);
     }
 
@@ -46,6 +50,11 @@ public class DriveTeleOpCommand extends CommandBase {
     @Override
     public void execute(){
         driveSubsystem.initializeIMU(parameters);
+        calculateSpeed(leftY.getAsDouble(), leftX.getAsDouble(), rightX.getAsDouble());
+        //reverse motor direction if necessary
         driveSubsystem.setMotors(leftBackSpeed, leftFrontSpeed, rightBackSpeed, rightFrontSpeed, runMode);
+        if (imuReset.getAsBoolean()){
+            imu.resetYaw();
+        }
     }
 }
