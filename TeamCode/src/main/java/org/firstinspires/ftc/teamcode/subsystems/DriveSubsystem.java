@@ -24,6 +24,10 @@ public class DriveSubsystem extends SubsystemBase {
 
     public void setMotors(double leftBackSpeed, double leftFrontSpeed, double rightBackSpeed, double rightFrontSpeed, Motor.RunMode runMode){
         motors.setRunMode(runMode);
+
+        leftBack.setInverted(true);
+        leftFront.setInverted(true);
+
         leftBack.setVelocity(leftBackSpeed * 1000);
         leftFront.setVelocity(leftFrontSpeed * 1000);
         rightBack.setVelocity(rightBackSpeed * 1000);
