@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
 @TeleOp
 public class StandardTeleOp extends CommandOpMode {
 
-    private static final Motor.GoBILDA motorRPM = Motor.GoBILDA.RPM_312;
+    private static final Motor.GoBILDA motorRPM = Motor.GoBILDA.RPM_435;
 
     @Override
     public void initialize(){
