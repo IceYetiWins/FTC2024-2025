@@ -24,13 +24,18 @@ public class DriveMotorTestTeleOp extends CommandOpMode {
                 new MotorEx(hardwareMap, "leftFront", motorRPM),
                 new MotorEx(hardwareMap, "rightBack", motorRPM),
                 new MotorEx(hardwareMap, "rightFront", motorRPM),
-                hardwareMap.get(IMU.class, "imu"));
+                hardwareMap.get(IMU.class, "imu"),
+                telemetry);
 
         drive.setDefaultCommand(new DriveMotorTestCommand(drive,
                 Motor.RunMode.VelocityControl,
                 () -> gamepad.getButton(GamepadKeys.Button.A),
                 () -> gamepad.getButton(GamepadKeys.Button.B),
                 () -> gamepad.getButton(GamepadKeys.Button.X),
-                () -> gamepad.getButton(GamepadKeys.Button.Y)));
+                () -> gamepad.getButton(GamepadKeys.Button.Y),
+                () -> gamepad.getButton(GamepadKeys.Button.LEFT_STICK_BUTTON),
+                () -> gamepad.getButton(GamepadKeys.Button.LEFT_BUMPER),
+                () -> gamepad.getButton(GamepadKeys.Button.RIGHT_STICK_BUTTON),
+                () -> gamepad.getButton(GamepadKeys.Button.RIGHT_BUMPER)));
     }
 }

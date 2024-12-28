@@ -4,6 +4,7 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.hardware.IMU;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
 
@@ -18,9 +19,10 @@ public class DriveTeleOpCommand extends CommandBase {
     private final DoubleSupplier leftY, leftX, rightX;
     private final BooleanSupplier imuReset;
     private double leftBackSpeed, leftFrontSpeed, rightBackSpeed, rightFrontSpeed;
+    private final Telemetry telemetry;
 
 
-    public DriveTeleOpCommand(DriveSubsystem subsystem, IMU imu, IMU.Parameters parameters, Motor.RunMode runMode, DoubleSupplier leftY, DoubleSupplier leftX, DoubleSupplier rightX, BooleanSupplier imuReset){
+    public DriveTeleOpCommand(DriveSubsystem subsystem, IMU imu, IMU.Parameters parameters, Motor.RunMode runMode, DoubleSupplier leftY, DoubleSupplier leftX, DoubleSupplier rightX, BooleanSupplier imuReset, Telemetry telemetry){
         driveSubsystem = subsystem;
         this.imu = imu;
         this.parameters = parameters;
@@ -29,6 +31,7 @@ public class DriveTeleOpCommand extends CommandBase {
         this.leftX = leftX;
         this.rightX = rightX;
         this.imuReset = imuReset;
+        this.telemetry = telemetry;
         addRequirements(subsystem);
     }
 
@@ -45,11 +48,24 @@ public class DriveTeleOpCommand extends CommandBase {
         leftBackSpeed = (rotY - rotX + rightX) / denominator;
         rightFrontSpeed = (rotY - rotX - rightX) / denominator;
         rightBackSpeed = (rotY + rotX - rightX) / denominator;
+
+        telemetry.addData("leftY: ", leftY);
+        telemetry.addData("leftX: ", leftX);
+        telemetry.addData("rightX: ", rightX);
+
+        telemetry.addData("bot heading: ", botHeading);
+        telemetry.addData("rotX: ", rotX);
+        telemetry.addData("rotY: ", rotY);
+        telemetry.addData("denominator: ", denominator);
+    }
+
+    @Override
+    public void initialize(){
+        driveSubsystem.initializeIMU(parameters);
     }
 
     @Override
     public void execute(){
-        driveSubsystem.initializeIMU(parameters);
         calculateSpeed(leftY.getAsDouble(), leftX.getAsDouble(), rightX.getAsDouble());
         //reverse motor direction if necessary
         driveSubsystem.setMotors(leftBackSpeed, leftFrontSpeed, rightBackSpeed, rightFrontSpeed, runMode);

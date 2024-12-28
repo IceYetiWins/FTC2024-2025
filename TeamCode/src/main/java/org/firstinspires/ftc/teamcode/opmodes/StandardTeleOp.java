@@ -25,12 +25,13 @@ public class StandardTeleOp extends CommandOpMode {
                 new MotorEx(hardwareMap, "leftFront", motorRPM),
                 new MotorEx(hardwareMap, "rightBack", motorRPM),
                 new MotorEx(hardwareMap, "rightFront", motorRPM),
-                hardwareMap.get(IMU.class, "imu"));
+                hardwareMap.get(IMU.class, "imu"),
+                telemetry);
 
         drive.setDefaultCommand(new DriveTeleOpCommand(drive,
                 hardwareMap.get(IMU.class, "imu"),
                 new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)),
                 Motor.RunMode.VelocityControl,
-                gamepad::getLeftY, gamepad::getLeftX, gamepad::getRightX, () -> gamepad.getButton(GamepadKeys.Button.BACK)));
+                gamepad::getLeftY, gamepad::getLeftX, gamepad::getRightX, () -> gamepad.getButton(GamepadKeys.Button.BACK), telemetry));
     }
 }

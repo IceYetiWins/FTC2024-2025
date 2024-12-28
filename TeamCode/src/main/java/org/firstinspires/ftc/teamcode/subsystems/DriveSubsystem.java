@@ -6,12 +6,14 @@ import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.hardware.motors.MotorGroup;
 import com.qualcomm.robotcore.hardware.IMU;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 public class DriveSubsystem extends SubsystemBase {
     private final MotorEx leftBack, leftFront, rightBack, rightFront;
     private final MotorGroup motors;
     private final IMU imu;
 
-    public DriveSubsystem(MotorEx leftBack, MotorEx leftFront, MotorEx rightBack, MotorEx rightFront, IMU imu){
+    public DriveSubsystem(MotorEx leftBack, MotorEx leftFront, MotorEx rightBack, MotorEx rightFront, IMU imu, Telemetry telemetry){
         this.leftBack = leftBack;
         this.leftFront = leftFront;
         this.rightBack = rightBack;
