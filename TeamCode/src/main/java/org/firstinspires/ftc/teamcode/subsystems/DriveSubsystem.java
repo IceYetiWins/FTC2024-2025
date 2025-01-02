@@ -12,6 +12,7 @@ public class DriveSubsystem extends SubsystemBase {
     private final MotorEx leftBack, leftFront, rightBack, rightFront;
     private final MotorGroup motors;
     private final IMU imu;
+    private final Telemetry telemetry;
 
     public DriveSubsystem(MotorEx leftBack, MotorEx leftFront, MotorEx rightBack, MotorEx rightFront, IMU imu, Telemetry telemetry){
         this.leftBack = leftBack;
@@ -22,6 +23,7 @@ public class DriveSubsystem extends SubsystemBase {
         motors = new MotorGroup(this.leftBack, this.leftFront, this.rightBack, this.rightFront);
 
         this.imu = imu;
+        this.telemetry = telemetry;
     }
 
     public void setMotors(double leftBackSpeed, double leftFrontSpeed, double rightBackSpeed, double rightFrontSpeed, Motor.RunMode runMode){
@@ -29,6 +31,11 @@ public class DriveSubsystem extends SubsystemBase {
 
         leftBack.setInverted(true);
         leftFront.setInverted(true);
+
+        telemetry.addData("left back (DriveSubsystem)", leftBackSpeed);
+        telemetry.addData("left front (DriveSubsystem)", leftFrontSpeed);
+        telemetry.addData("right back (DriveSubsystem)", rightBackSpeed);
+        telemetry.addData("right front (DriveSubsystem)", rightFrontSpeed);
 
         leftBack.setVelocity(leftBackSpeed * 1000);
         leftFront.setVelocity(leftFrontSpeed * 1000);
