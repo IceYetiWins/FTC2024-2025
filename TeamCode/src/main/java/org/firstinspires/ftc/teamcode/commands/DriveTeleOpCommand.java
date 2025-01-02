@@ -49,14 +49,21 @@ public class DriveTeleOpCommand extends CommandBase {
         rightFrontSpeed = (rotY - rotX - rightX) / denominator;
         rightBackSpeed = (rotY + rotX - rightX) / denominator;
 
-        telemetry.addData("leftY: ", leftY);
-        telemetry.addData("leftX: ", leftX);
-        telemetry.addData("rightX: ", rightX);
+        telemetry.addData("leftY", leftY);
+        telemetry.addData("leftX", leftX);
+        telemetry.addData("rightX", rightX);
 
-        telemetry.addData("bot heading: ", botHeading);
-        telemetry.addData("rotX: ", rotX);
-        telemetry.addData("rotY: ", rotY);
-        telemetry.addData("denominator: ", denominator);
+        telemetry.addData("bot heading", botHeading);
+        telemetry.addData("rotX", rotX);
+        telemetry.addData("rotY", rotY);
+        telemetry.addData("denominator", denominator);
+
+        telemetry.addData("left back", leftBackSpeed);
+        telemetry.addData("left front", leftFrontSpeed);
+        telemetry.addData("right back", rightBackSpeed);
+        telemetry.addData("right front", rightFrontSpeed);
+
+        telemetry.update();
     }
 
     @Override
