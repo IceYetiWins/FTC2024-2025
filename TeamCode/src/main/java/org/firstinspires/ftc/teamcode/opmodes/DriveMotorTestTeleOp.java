@@ -28,7 +28,6 @@ public class DriveMotorTestTeleOp extends CommandOpMode {
                 telemetry);
 
         drive.setDefaultCommand(new DriveMotorTestCommand(drive,
-                Motor.RunMode.VelocityControl,
                 () -> gamepad.getButton(GamepadKeys.Button.A),
                 () -> gamepad.getButton(GamepadKeys.Button.B),
                 () -> gamepad.getButton(GamepadKeys.Button.X),

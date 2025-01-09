@@ -26,8 +26,8 @@ public class DriveSubsystem extends SubsystemBase {
         this.telemetry = telemetry;
     }
 
-    public void setMotors(double leftBackSpeed, double leftFrontSpeed, double rightBackSpeed, double rightFrontSpeed, Motor.RunMode runMode){
-        motors.setRunMode(runMode);
+    public void setMotors(double leftBackSpeed, double leftFrontSpeed, double rightBackSpeed, double rightFrontSpeed){
+        motors.setRunMode(Motor.RunMode.RawPower);
 
         leftBack.setInverted(true);
         leftFront.setInverted(true);
@@ -37,10 +37,10 @@ public class DriveSubsystem extends SubsystemBase {
         telemetry.addData("right back (DriveSubsystem)", rightBackSpeed);
         telemetry.addData("right front (DriveSubsystem)", rightFrontSpeed);
 
-        leftBack.setVelocity(leftBackSpeed * 1000);
-        leftFront.setVelocity(leftFrontSpeed * 1000);
-        rightBack.setVelocity(rightBackSpeed * 1000);
-        rightFront.setVelocity(rightFrontSpeed * 1000);
+        leftBack.set(leftBackSpeed * .666);
+        leftFront.set(leftFrontSpeed * .666);
+        rightBack.set(rightBackSpeed * .666);
+        rightFront.set(rightFrontSpeed * .666);
     }
 
     public void initializeIMU(IMU.Parameters parameters){

@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.commands;
 
 import com.arcrobotics.ftclib.command.CommandBase;
-import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -15,18 +14,16 @@ public class DriveTeleOpCommand extends CommandBase {
     private final DriveSubsystem driveSubsystem;
     private final IMU imu;
     private final IMU.Parameters parameters;
-    private final Motor.RunMode runMode;
     private final DoubleSupplier leftY, leftX, rightX;
     private final BooleanSupplier imuReset;
     private double leftBackSpeed, leftFrontSpeed, rightBackSpeed, rightFrontSpeed;
     private final Telemetry telemetry;
 
 
-    public DriveTeleOpCommand(DriveSubsystem subsystem, IMU imu, IMU.Parameters parameters, Motor.RunMode runMode, DoubleSupplier leftY, DoubleSupplier leftX, DoubleSupplier rightX, BooleanSupplier imuReset, Telemetry telemetry){
+    public DriveTeleOpCommand(DriveSubsystem subsystem, IMU imu, IMU.Parameters parameters, DoubleSupplier leftY, DoubleSupplier leftX, DoubleSupplier rightX, BooleanSupplier imuReset, Telemetry telemetry){
         driveSubsystem = subsystem;
         this.imu = imu;
         this.parameters = parameters;
-        this.runMode = runMode;
         this.leftY = leftY;
         this.leftX = leftX;
         this.rightX = rightX;
@@ -74,8 +71,9 @@ public class DriveTeleOpCommand extends CommandBase {
     @Override
     public void execute(){
         calculateSpeed(leftY.getAsDouble(), leftX.getAsDouble(), rightX.getAsDouble());
-        //reverse motor direction if necessary
-        driveSubsystem.setMotors(leftBackSpeed, leftFrontSpeed, rightBackSpeed, rightFrontSpeed, runMode);
+
+        driveSubsystem.setMotors(leftBackSpeed, leftFrontSpeed, rightBackSpeed, rightFrontSpeed);
+
         if (imuReset.getAsBoolean()){
             imu.resetYaw();
         }

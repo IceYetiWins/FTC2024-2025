@@ -1,18 +1,15 @@
 package org.firstinspires.ftc.teamcode.commands;
 import com.arcrobotics.ftclib.command.CommandBase;
-import com.arcrobotics.ftclib.hardware.motors.Motor;
 import org.firstinspires.ftc.teamcode.subsystems.DriveSubsystem;
 import java.util.function.BooleanSupplier;
 
 public class DriveMotorTestCommand extends CommandBase {
     private final DriveSubsystem driveSubsystem;
-    private final Motor.RunMode runMode;
     private final BooleanSupplier aButton, bButton, xButton, yButton, leftStick, leftBumper, rightStick, rightBumper;
 
 
-    public DriveMotorTestCommand(DriveSubsystem subsystem, Motor.RunMode runMode, BooleanSupplier aButton, BooleanSupplier bButton, BooleanSupplier xButton, BooleanSupplier yButton, BooleanSupplier leftStick, BooleanSupplier leftBumper, BooleanSupplier rightStick, BooleanSupplier rightBumper){
+    public DriveMotorTestCommand(DriveSubsystem subsystem, BooleanSupplier aButton, BooleanSupplier bButton, BooleanSupplier xButton, BooleanSupplier yButton, BooleanSupplier leftStick, BooleanSupplier leftBumper, BooleanSupplier rightStick, BooleanSupplier rightBumper){
         driveSubsystem = subsystem;
-        this.runMode = runMode;
         this.aButton = aButton;
         this.bButton = bButton;
         this.xButton = xButton;
@@ -28,40 +25,40 @@ public class DriveMotorTestCommand extends CommandBase {
     public void execute(){
         double leftBackSpeed;
         if (leftStick.getAsBoolean()) {
-            leftBackSpeed = -10000;
+            leftBackSpeed = -1;
         } else if (aButton.getAsBoolean()) {
-            leftBackSpeed = 10000;
+            leftBackSpeed = 1;
         } else {
             leftBackSpeed = 0;
         }
 
         double leftFrontSpeed;
         if (leftBumper.getAsBoolean()) {
-            leftFrontSpeed = -10000;
+            leftFrontSpeed = -1;
         } else if (bButton.getAsBoolean()) {
-            leftFrontSpeed = 10000;
+            leftFrontSpeed = 1;
         } else {
             leftFrontSpeed = 0;
         }
 
         double rightBackSpeed;
         if (rightStick.getAsBoolean()) {
-            rightBackSpeed = -10000;
+            rightBackSpeed = -1;
         } else if (xButton.getAsBoolean()) {
-            rightBackSpeed = 10000;
+            rightBackSpeed = 1;
         } else {
             rightBackSpeed = 0;
         }
 
         double rightFrontSpeed;
         if (rightBumper.getAsBoolean()) {
-            rightFrontSpeed = -10000;
+            rightFrontSpeed = -1;
         } else if (yButton.getAsBoolean()) {
-            rightFrontSpeed = 10000;
+            rightFrontSpeed = 1;
         } else {
             rightFrontSpeed = 0;
         }
 
-        driveSubsystem.setMotors(leftBackSpeed, leftFrontSpeed, rightBackSpeed, rightFrontSpeed, runMode);
+        driveSubsystem.setMotors(leftBackSpeed, leftFrontSpeed, rightBackSpeed, rightFrontSpeed);
     }
 }
