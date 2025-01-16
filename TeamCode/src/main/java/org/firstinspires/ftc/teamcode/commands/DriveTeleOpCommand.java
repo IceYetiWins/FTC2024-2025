@@ -33,7 +33,8 @@ public class DriveTeleOpCommand extends CommandBase {
     }
 
     public void calculateSpeed(Double leftY, Double leftX, Double rightX){
-        double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+        //double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS); //field centric
+        double botHeading = 0; //robot centric
 
         double rotX = leftX * Math.cos(-botHeading) - leftY * Math.sin(-botHeading);
         double rotY = leftX * Math.sin(-botHeading) + leftY * Math.cos(-botHeading);
