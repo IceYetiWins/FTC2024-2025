@@ -8,11 +8,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 @TeleOp
 public class ArmRotateTesting extends OpMode {
     private MotorEx rotateMotor;
-    private static final double ROTATE_SPEED = .5;
+    private static final double ROTATE_SPEED = .25;
 
     @Override
     public void init(){
-        rotateMotor = new MotorEx(hardwareMap, "rotateMotor", Motor.GoBILDA.RPM_312);
+        rotateMotor = new MotorEx(hardwareMap, "rotateMotor", Motor.GoBILDA.RPM_30);
         rotateMotor.setRunMode(Motor.RunMode.RawPower);
     }
 
