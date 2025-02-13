@@ -10,12 +10,12 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 
+@Autonomous(preselectTeleOp = "StandardTeleOp")
 @Config
-@Autonomous(name = "ParkAuto", group = "Autonomous")
 public class ParkAuto extends LinearOpMode {
     @Override
     public void runOpMode() {
-        Pose2d initialPose = new Pose2d(0, 0, Math.PI/2); //need to add correct starting position
+        Pose2d initialPose = new Pose2d(6, 0, Math.PI/2); //need to add correct starting position (in inches?)
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
 
         TrajectoryActionBuilder park = drive.actionBuilder(initialPose)

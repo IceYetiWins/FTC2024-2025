@@ -10,6 +10,7 @@ public class ArmRotateSubsystem extends SubsystemBase {
     public ArmRotateSubsystem(MotorEx rotateMotor) {
         this.rotateMotor = rotateMotor;
         this.rotateMotor.setRunMode(Motor.RunMode.RawPower);
+        this.rotateMotor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
     }
 
     public void setPower(double speed) {
