@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.opmodes;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.CommandOpMode;
+import com.arcrobotics.ftclib.command.CommandScheduler;
+import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
@@ -25,9 +27,24 @@ public class ParkAutoAlternate extends CommandOpMode {
                 hardwareMap.get(IMU.class, "imu"),
                 telemetry);
 
-        drive.setDefaultCommand(new DriveTeleOpCommand(drive,
+//        drive.setDefaultCommand(new DriveTeleOpCommand(drive,
+//                hardwareMap.get(IMU.class, "imu"),
+//                new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)),
+//                () -> -.2, () -> .8, () -> .1, () -> false, telemetry));
+
+        DriveTeleOpCommand command1 = new DriveTeleOpCommand(drive,
                 hardwareMap.get(IMU.class, "imu"),
                 new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)),
-                () -> .8, () -> -.2, () -> 0, () -> false, telemetry));
+                () -> -.2, () -> .8, () -> .1, () -> false, telemetry);
+
+        DriveTeleOpCommand command2 = new DriveTeleOpCommand(drive,
+                hardwareMap.get(IMU.class, "imu"),
+                new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)),
+                () -> 0, () -> 0, () -> 0, () -> false, telemetry);
+
+        CommandScheduler.getInstance().schedule(new SequentialCommandGroup(
+                command1.withTimeout(3000), //change number of seconds
+                command2
+        ));
     }
 }

@@ -12,8 +12,8 @@ public class ClawSubsystem extends SubsystemBase {
         this.servo2 = servo2;
     }
 
-    public void toAngle(double degrees){
-        servo1.turnToAngle(degrees);
-        servo2.turnToAngle(degrees);
+    public void toAngle(double degrees1, double degrees2){
+        servo1.turnToAngle(degrees1);
+        servo2.turnToAngle(degrees2);
     }
 }
