@@ -17,12 +17,12 @@ public class SlidesSubsystem extends SubsystemBase {
     }
 
     public void extend(boolean extend, double speed){
-        if (extend){
-            motor1.set(speed);
-            motor2.set(-speed);
-        } else {
-            motor1.set(-speed);
+        if (extend) {
             motor2.set(speed);
+        } else if (speed == 0){
+            motor2.set(0);
+        } else {
+            motor2.set(-speed);
         }
     }
 }

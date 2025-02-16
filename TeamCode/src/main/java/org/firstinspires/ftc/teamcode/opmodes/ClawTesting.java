@@ -12,17 +12,18 @@ public class ClawTesting extends OpMode {
     @Override
     public void init(){
         servo1 = new SimpleServo(hardwareMap, "claw1", 0, 360);
-        servo1.setInverted(true);
+//        servo1.setInverted(true);
         servo2 = new SimpleServo(hardwareMap, "claw2", 0, 360);
+        servo2.setInverted(true);
     }
 
     @Override
     public void loop(){
         if (gamepad1.a){
-            servo1.turnToAngle(50);
-            servo2.turnToAngle(50);
-        } else {
             servo1.turnToAngle(120);
+            servo2.turnToAngle(0);
+        } else {
+            servo1.turnToAngle(80);
             servo2.turnToAngle(120);
         }
     }

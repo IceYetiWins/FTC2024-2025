@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 @TeleOp
 public class ArmExtendTesting extends OpMode {
     private MotorEx extend1, extend2;
-    private static final double EXTEND_SPEED = .02;
+    private static final double EXTEND_SPEED = .1;
 
     @Override
     public void init(){
@@ -26,6 +26,9 @@ public class ArmExtendTesting extends OpMode {
         } else if (gamepad1.b) {
             extend1.set(-EXTEND_SPEED);
             extend2.set(EXTEND_SPEED);
+        } else {
+            extend1.set(0);
+            extend2.set(0);
         }
     }
 }

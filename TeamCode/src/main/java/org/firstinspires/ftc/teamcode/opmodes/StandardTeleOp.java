@@ -26,9 +26,9 @@ public class StandardTeleOp extends CommandOpMode {
     private static final Motor.GoBILDA ARM_EXTEND_RPM = Motor.GoBILDA.RPM_312; //change if needed
     private static final Motor.GoBILDA ARM_ROTATE_RPM = Motor.GoBILDA.RPM_312;
 
-    private static final double ARM_EXTEND_SPEED = .1;
+    private static final double ARM_EXTEND_SPEED = .85;
     private static final double CLAW_MIN_DEGREES = 0, CLAW_MAX_DEGREES = 360;
-    private static final double ARM_ROTATE_SPEED = .25;
+    private static final double ARM_ROTATE_SPEED = .75;
 
     @Override
     public void initialize(){
@@ -43,7 +43,7 @@ public class StandardTeleOp extends CommandOpMode {
 
         SlidesSubsystem slides = new SlidesSubsystem(new MotorEx(hardwareMap, "extend1", ARM_EXTEND_RPM), new MotorEx(hardwareMap, "extend2", ARM_EXTEND_RPM));
 
-        ArmRotateSubsystem armRotate = new ArmRotateSubsystem(new MotorEx(hardwareMap, "rotateMotor1", ARM_ROTATE_RPM), new MotorEx(hardwareMap, "rotateMotor2", ARM_ROTATE_RPM));
+        ArmRotateSubsystem armRotate = new ArmRotateSubsystem(new MotorEx(hardwareMap, "rotateMotor1", Motor.GoBILDA.RPM_312), new MotorEx(hardwareMap, "rotateMotor2", Motor.GoBILDA.RPM_30));
 
         ClawSubsystem claw = new ClawSubsystem(new SimpleServo(hardwareMap, "claw1", CLAW_MIN_DEGREES, CLAW_MAX_DEGREES), new SimpleServo(hardwareMap, "claw2", CLAW_MIN_DEGREES, CLAW_MAX_DEGREES));
 
@@ -52,10 +52,10 @@ public class StandardTeleOp extends CommandOpMode {
                 new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)),
                 gamepad::getLeftY, gamepad::getLeftX, gamepad::getRightX, () -> gamepad.getButton(GamepadKeys.Button.BACK), telemetry));
 
-        slides.setDefaultCommand(new SlidesCommand(slides, () -> gamepad.getButton(GamepadKeys.Button.A), () -> gamepad.getButton(GamepadKeys.Button.B), ARM_EXTEND_SPEED));
+        slides.setDefaultCommand(new SlidesCommand(slides, () -> gamepad.getButton(GamepadKeys.Button.X), () -> gamepad.getButton(GamepadKeys.Button.Y), ARM_EXTEND_SPEED));
 
         armRotate.setDefaultCommand(new ArmRotateCommand(armRotate, () -> gamepad.getButton(GamepadKeys.Button.A), () -> gamepad.getButton(GamepadKeys.Button.B), ARM_ROTATE_SPEED));
 
-        claw.setDefaultCommand(new ClawCommand(claw, () -> gamepad.getButton(GamepadKeys.Button.RIGHT_BUMPER), 60, 120, 60, 120));
+        claw.setDefaultCommand(new ClawCommand(claw, () -> gamepad.getButton(GamepadKeys.Button.RIGHT_BUMPER), 240, 180, 340, 280));
     }
 }

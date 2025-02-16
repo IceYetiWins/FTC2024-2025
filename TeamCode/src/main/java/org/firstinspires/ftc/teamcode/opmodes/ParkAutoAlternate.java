@@ -42,7 +42,13 @@ public class ParkAutoAlternate extends CommandOpMode {
                 new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)),
                 () -> 0, () -> 0, () -> 0, () -> false, telemetry);
 
+        DriveTeleOpCommand command3 = new DriveTeleOpCommand(drive,
+                hardwareMap.get(IMU.class, "imu"),
+                new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)),
+                () -> 0, () -> 0, () -> 0, () -> false, telemetry);
+
         CommandScheduler.getInstance().schedule(new SequentialCommandGroup(
+                command3.withTimeout(10000),
                 command1.withTimeout(3000), //change number of seconds
                 command2
         ));

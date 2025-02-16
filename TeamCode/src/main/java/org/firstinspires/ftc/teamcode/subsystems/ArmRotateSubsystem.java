@@ -12,13 +12,12 @@ public class ArmRotateSubsystem extends SubsystemBase {
         this.rotateMotor1.setRunMode(Motor.RunMode.RawPower);
         this.rotateMotor1.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
         this.rotateMotor2 = rotateMotor2;
-        this.rotateMotor2.setInverted(true); //switch which is inverted if needed
         this.rotateMotor2.setRunMode(Motor.RunMode.RawPower);
         this.rotateMotor2.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
     }
 
     public void setPower(double speed) {
         rotateMotor1.set(speed);
-        rotateMotor2.set(speed);
+        rotateMotor2.set(-speed);
     }
 }
