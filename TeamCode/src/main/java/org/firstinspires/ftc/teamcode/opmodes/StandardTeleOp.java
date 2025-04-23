@@ -24,7 +24,7 @@ public class StandardTeleOp extends CommandOpMode {
 
     private static final Motor.GoBILDA DRIVE_RPM = Motor.GoBILDA.RPM_435;
     private static final Motor.GoBILDA ARM_EXTEND_RPM = Motor.GoBILDA.RPM_312; //change if needed
-    private static final Motor.GoBILDA ARM_ROTATE_RPM = Motor.GoBILDA.RPM_312;
+    private static final Motor.GoBILDA ARM_ROTATE_RPM = Motor.GoBILDA.RPM_30;
 
     private static final double ARM_EXTEND_SPEED = .85;
     private static final double CLAW_MIN_DEGREES = 0, CLAW_MAX_DEGREES = 360;
@@ -41,9 +41,9 @@ public class StandardTeleOp extends CommandOpMode {
                 hardwareMap.get(IMU.class, "imu"),
                 telemetry);
 
-        SlidesSubsystem slides = new SlidesSubsystem(new MotorEx(hardwareMap, "extend1", ARM_EXTEND_RPM), new MotorEx(hardwareMap, "extend2", ARM_EXTEND_RPM));
+        SlidesSubsystem slides = new SlidesSubsystem(new MotorEx(hardwareMap, "extend", ARM_EXTEND_RPM));
 
-        ArmRotateSubsystem armRotate = new ArmRotateSubsystem(new MotorEx(hardwareMap, "rotateMotor1", Motor.GoBILDA.RPM_312), new MotorEx(hardwareMap, "rotateMotor2", Motor.GoBILDA.RPM_30));
+        ArmRotateSubsystem armRotate = new ArmRotateSubsystem(new MotorEx(hardwareMap, "rotate", ARM_ROTATE_RPM));
 
         ClawSubsystem claw = new ClawSubsystem(new SimpleServo(hardwareMap, "claw1", CLAW_MIN_DEGREES, CLAW_MAX_DEGREES), new SimpleServo(hardwareMap, "claw2", CLAW_MIN_DEGREES, CLAW_MAX_DEGREES));
 
