@@ -23,12 +23,12 @@ import org.firstinspires.ftc.teamcode.subsystems.SlidesSubsystem;
 public class StandardTeleOp extends CommandOpMode {
 
     private static final Motor.GoBILDA DRIVE_RPM = Motor.GoBILDA.RPM_435;
-    private static final Motor.GoBILDA ARM_EXTEND_RPM = Motor.GoBILDA.RPM_312; //change if needed
+    private static final Motor.GoBILDA ARM_EXTEND_RPM = Motor.GoBILDA.RPM_312;
     private static final Motor.GoBILDA ARM_ROTATE_RPM = Motor.GoBILDA.RPM_30;
 
-    private static final double ARM_EXTEND_SPEED = .85;
+    private static final double ARM_EXTEND_SPEED = .3;
     private static final double CLAW_MIN_DEGREES = 0, CLAW_MAX_DEGREES = 360;
-    private static final double ARM_ROTATE_SPEED = .75;
+    private static final double ARM_ROTATE_SPEED = .7;
 
     @Override
     public void initialize(){
@@ -43,7 +43,7 @@ public class StandardTeleOp extends CommandOpMode {
 
         SlidesSubsystem slides = new SlidesSubsystem(new MotorEx(hardwareMap, "extend", ARM_EXTEND_RPM));
 
-        ArmRotateSubsystem armRotate = new ArmRotateSubsystem(new MotorEx(hardwareMap, "rotate", ARM_ROTATE_RPM));
+        ArmRotateSubsystem armRotate = new ArmRotateSubsystem(new MotorEx(hardwareMap, "rotate1", ARM_ROTATE_RPM), new MotorEx(hardwareMap, "rotate2", ARM_ROTATE_RPM));
 
         ClawSubsystem claw = new ClawSubsystem(new SimpleServo(hardwareMap, "claw1", CLAW_MIN_DEGREES, CLAW_MAX_DEGREES), new SimpleServo(hardwareMap, "claw2", CLAW_MIN_DEGREES, CLAW_MAX_DEGREES));
 
@@ -56,6 +56,6 @@ public class StandardTeleOp extends CommandOpMode {
 
         armRotate.setDefaultCommand(new ArmRotateCommand(armRotate, () -> gamepad.getButton(GamepadKeys.Button.A), () -> gamepad.getButton(GamepadKeys.Button.B), ARM_ROTATE_SPEED));
 
-        claw.setDefaultCommand(new ClawCommand(claw, () -> gamepad.getButton(GamepadKeys.Button.RIGHT_BUMPER), 240, 180, 340, 280));
+        claw.setDefaultCommand(new ClawCommand(claw, () -> gamepad.getButton(GamepadKeys.Button.RIGHT_BUMPER), 195, 260, 305, 360));
     }
 }

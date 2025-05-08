@@ -37,13 +37,14 @@ public class DriveSubsystem extends SubsystemBase {
         telemetry.addData("right back (DriveSubsystem)", rightBackSpeed);
         telemetry.addData("right front (DriveSubsystem)", rightFrontSpeed);
 
-        leftBack.set(leftBackSpeed * .666);
-        leftFront.set(leftFrontSpeed * .666);
-        rightBack.set(rightBackSpeed * .666);
-        rightFront.set(rightFrontSpeed * .666);
+        leftBack.set(leftBackSpeed * .444);
+        leftFront.set(leftFrontSpeed * .444);
+        rightBack.set(rightBackSpeed * .444);
+        rightFront.set(rightFrontSpeed * .444);
     }
 
     public void initializeIMU(IMU.Parameters parameters){
         imu.initialize(parameters);
     }
 }
+
