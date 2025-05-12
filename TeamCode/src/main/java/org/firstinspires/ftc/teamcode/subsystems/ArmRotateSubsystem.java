@@ -18,6 +18,6 @@ public class ArmRotateSubsystem extends SubsystemBase {
 
     public void setPower(double speed) {
         rotateMotor1.set(speed);
-        rotateMotor2.set(-speed);
+        rotateMotor2.set(speed);
     }
 }
